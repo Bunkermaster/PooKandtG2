@@ -29,6 +29,25 @@ class PageModel
      */
     public function findAll(): ?array
     {
+        $sql = "SELECT
+  `id`,
+  `slug`,
+  `h1`,
+  `p`,
+  `span-class`,
+  `span-text`,
+  `img-alt`,
+  `img-src`
+FROM 
+  `page`
+;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if ([] === $data) {
+            return null;
+        }
 
+        return $data;
     }
 }
