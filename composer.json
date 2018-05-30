@@ -12,7 +12,8 @@
         "psr-4": {
             "Controller\\": "src/Controller",
             "Model\\": "src/Model",
-            "View\\": "src/View"
+            "View\\": "src/View",
+            "Helper\\": "src/Helper"
         },
         "files": [
             "init.php"
