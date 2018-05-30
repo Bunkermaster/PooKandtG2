@@ -13,6 +13,9 @@
             "Controller\\": "src/Controller",
             "Model\\": "src/Model",
             "View\\": "src/View"
-        }
+        },
+        "files": [
+            "init.php"
+        ]
     }
 }

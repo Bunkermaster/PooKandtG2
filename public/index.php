@@ -5,6 +5,9 @@
  * Date: 30/05/2018
  * Time: 11:19
  */
-require_once dirname(__DIR__)."/index.php";
 
-echo KANDT_ROOT_DIR;
+use \Controller\FrontController;
+
+require_once dirname(__DIR__)."/vendor/autoload.php";
+
+$frontController = new FrontController();
