@@ -1,0 +1,10 @@
+{
+    "name": "bunker/pookandtg2",
+    "authors": [
+        {
+            "name": "bunkermaster",
+            "email": "yann.le-scouarnec@hetic.net"
+        }
+    ],
+    "require": {}
+}
