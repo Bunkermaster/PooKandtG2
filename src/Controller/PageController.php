@@ -11,7 +11,7 @@ class PageController
 {
     public function index()
     {
-
+        echo "index!";
     }
 
     public function show()
