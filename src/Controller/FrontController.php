@@ -30,6 +30,14 @@ class FrontController
                 $controller->edit();
                 break;
 
+            case "page.add":
+                $controller->add();
+                break;
+
+            case "page.delete":
+                $controller->delete();
+                break;
+
             default:
                 echo "It works!";
                 break;

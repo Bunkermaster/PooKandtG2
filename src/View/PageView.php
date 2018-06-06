@@ -14,9 +14,9 @@ class PageView
 ?>
         <table>
             <tr>
-                <th>id</th>
-                <th>slug</th>
-                <th>action</th>
+                <th>ID</th>
+                <th>Slug</th>
+                <th>Action</th>
             </tr>
             <?php if (null === $data) :?>
                 <tr>
@@ -27,7 +27,10 @@ class PageView
                 <tr>
                     <td><?=$onePage['id'] ?? ''?></td>
                     <td><?=$onePage['slug'] ?? ''?></td>
-                    <td>Action</td>
+                    <td>
+                        <a href="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.edit&id=<?=$onePage['id'] ?? ''?>">Edit</a>
+                        <a href="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.delete&id=<?=$onePage['id'] ?? ''?>">Delete</a>
+                    </td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>
@@ -36,11 +39,12 @@ class PageView
         $this->form();
     }
 
-    public function edit($data){
+    public function edit($data): void
+    {
         $this->form($data, 'page.edit', "Modifier");
     }
 
-    public function form(array $data = [], $formAction = 'page.add', $buttonValue = "Ajouter")
+    public function form(array $data = [], $formAction = 'page.add', $buttonValue = "Ajouter"): void
     {
         ?>
     <form action="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=<?=$formAction?>" method="post">
@@ -57,5 +61,17 @@ class PageView
         <input type="submit" value="<?=$buttonValue?>">
     </form>
 <?php
+    }
+
+    public function delete(array $data): void
+    {
+?>
+        <form action="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.delete" method="post">
+            <input type="hidden" name="page[id]" value="<?=$data['id'] ?? ''?>">
+            <h2>Etes vous certain de supprimer <i><?=$data['slug'] ?? ''?></i></h2>
+            <input type="submit" value="Supprimer">
+        </form>
+<?php
+
     }
 }
