@@ -9,8 +9,9 @@ namespace View;
  */
 class PageView
 {
-    public function index(?array $data): void
+    public function index(?array $data): string
     {
+        ob_start();
 ?>
         <table>
             <tr>
@@ -25,7 +26,11 @@ class PageView
             <?php else:?>
                 <?php foreach ($data as $onePage):?>
                 <tr>
-                    <td><?=$onePage['id'] ?? ''?></td>
+                    <td>
+                        <a href="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.show&id=<?=$onePage['id'] ?? ''?>">
+                            <?=$onePage['id'] ?? ''?>
+                        </a>
+                    </td>
                     <td><?=$onePage['slug'] ?? ''?></td>
                     <td>
                         <a href="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.edit&id=<?=$onePage['id'] ?? ''?>">Edit</a>
@@ -37,11 +42,15 @@ class PageView
         </table>
 <?php
         $this->form();
+        return \ob_get_clean();
     }
 
-    public function edit($data): void
+    public function edit($data): string
     {
+        ob_start();
         $this->form($data, 'page.edit', "Modifier");
+
+        return \ob_get_clean();
     }
 
     public function form(array $data = [], $formAction = 'page.add', $buttonValue = "Ajouter"): void
@@ -63,8 +72,9 @@ class PageView
 <?php
     }
 
-    public function delete(array $data): void
+    public function delete(array $data): string
     {
+        ob_start();
 ?>
         <form action="<?=KANDT_ROOT_URI.KANDT_ACTION_PARAM?>=page.delete" method="post">
             <input type="hidden" name="page[id]" value="<?=$data['id'] ?? ''?>">
@@ -73,5 +83,8 @@ class PageView
         </form>
 <?php
 
+        return \ob_get_clean();
     }
+
+
 }
