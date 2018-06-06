@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Controller\PageController;
+use Controller\UserController;
 
 /**
  * Class FrontController
@@ -13,34 +14,48 @@ class FrontController
 {
     public function __construct()
     {
+        \session_start();
         $action = $_POST[\KANDT_ACTION_PARAM] ?? $_GET[\KANDT_ACTION_PARAM] ?? '';
-        $controllerName = "Controller\PageController";
-        $controller = new $controllerName();
-
+        $userController = new UserController();
         switch($action){
             case "page.show":
-                $controller->show();
+                $controller = new PageController();
+                $output = $controller->show();
                 break;
 
             case "page.index":
-                $controller->index();
+                $controller = new PageController();
+                $output = $controller->index();
                 break;
 
             case "page.edit":
-                $controller->edit();
+                $controller = new PageController();
+                $output = $controller->edit();
                 break;
 
             case "page.add":
-                $controller->add();
+                $controller = new PageController();
+                $output = $controller->add();
                 break;
 
             case "page.delete":
-                $controller->delete();
+                $controller = new PageController();
+                $output = $controller->delete();
+                break;
+
+            case "user.manager":
+                $output = $userController->nameManager();
+                break;
+
+            case "user.logout":
+                $output = $userController->logout();
                 break;
 
             default:
-                echo "It works!";
+                $output = "It works!";
                 break;
         }
+        echo $userController->nameManager();
+        echo $output;
     }
 }

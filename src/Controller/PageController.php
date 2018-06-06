@@ -28,7 +28,7 @@ class PageController extends AbstractController
      */
     public function index()
     {
-        $this->view->index($this->model->findAll());
+        return $this->view->index($this->model->findAll());
     }
 
     /**
@@ -36,7 +36,11 @@ class PageController extends AbstractController
      */
     public function show()
     {
-
+        if (!isset($_GET['id']) && !isset($_POST['id'])) {
+            throw new \Exception("id param doesn't exist");
+        }
+        $data = $this->model->find($_GET['id'] ?? $_POST['id'] ?? 0);
+        return var_export($data, true);
     }
 
     /**
@@ -61,7 +65,7 @@ class PageController extends AbstractController
         }
         $data = $this->model->find($_GET['id'] ?? $_POST['id'] ?? 0);
         // display form
-        $this->view->delete($data);
+        return $this->view->delete($data);
 
     }
 
@@ -110,6 +114,6 @@ class PageController extends AbstractController
             $data = $this->model->find($_GET['id'] ?? $_POST['id'] ?? 0);
         }
         // display form
-        $this->view->edit($data);
+        return $this->view->edit($data);
     }
 }
