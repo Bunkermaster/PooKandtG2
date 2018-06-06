@@ -47,6 +47,7 @@ FROM
     public function find(int $id): array
     {
         $sql = "SELECT 
+  `id`, 
   `title`, 
   `slug`, 
   `h1`, 
